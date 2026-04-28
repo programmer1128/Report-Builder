@@ -1,4 +1,9 @@
-📊 Java Report Builder – Dynamic PDF Table Generator
+## 📊 Java Report Builder – Dynamic PDF Table Generator
+
+## Copyright (c) 2026 Aritra Banerjee. All Rights Reserved.
+
+This project and its source code are proprietary and confidential. Unauthorized copying of this repository or any of its files, via any medium, is strictly prohibited. No license is granted to use, modify, or distribute this code.
+
 
 A from-scratch, enterprise-style report generation engine in Java that reads structured data from Excel files and renders paginated, column-aware PDF reports with dynamic layouts.
 
