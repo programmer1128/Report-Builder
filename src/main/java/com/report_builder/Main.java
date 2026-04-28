@@ -1,7 +1,17 @@
+/*
+ * Copyright (c) 2026 Aritra Banerjee. All Rights Reserved.
+ * GitHub: https://github.com/programmer1128
+ * Unauthorized copying of this file, via any medium is strictly prohibited.
+ */
+
+
+
 package com.report_builder;
 
-import java.util.*;
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
 
 public class Main 
 {

@@ -1,12 +1,23 @@
+/*
+ * Copyright (c) 2026 Aritra Banerjee. All Rights Reserved.
+ * GitHub: https://github.com/programmer1128
+ * Unauthorized copying of this file, via any medium is strictly prohibited.
+ */
+
+
 package com.report_builder;
 
-import com.itextpdf.kernel.pdf.*;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.kernel.pdf.canvas.PdfCanvas;
 import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.properties.TextAlignment;
-import java.io.IOException;
-import java.util.*;
 
 public class ReportPartitioner
 {

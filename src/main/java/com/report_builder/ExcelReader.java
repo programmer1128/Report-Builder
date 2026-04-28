@@ -1,4 +1,19 @@
+/*
+ * Copyright (c) 2026 Aritra Banerjee. All Rights Reserved.
+ * GitHub: https://github.com/programmer1128
+ * Unauthorized copying of this file, via any medium is strictly prohibited.
+ */
+
+
+
 package com.report_builder;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.DataFormatter;
@@ -6,12 +21,6 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
-import java.io.File; 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.HashMap;
 
 //this class is used to read data from the excel file
 public class ExcelReader 
