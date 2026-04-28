@@ -1,6 +1,5 @@
 #!/bin/bash
 
-# Define the stamp exactly as you want it to appear
 STAMP=$(cat << 'EOF'
 /*
  * Copyright (c) 2026 Aritra Banerjee. All Rights Reserved.
