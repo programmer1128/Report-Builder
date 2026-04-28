@@ -11,7 +11,7 @@ A from-scratch, enterprise-style report generation engine in Java that reads str
 
 
 
-🚀 Overview
+## 🚀 Overview
 
 This project is designed to simulate how real-world reporting systems work in enterprise environments.
 
@@ -23,32 +23,32 @@ Adaptive layout based on page size
 Text wrapping and row height calculation
 
 
-Key Features
+## Key Features
 📥 Excel Data Ingestion
 Reads multiple sheets from Excel
 Converts data into a structured List<List<String>>
 Handles missing/null cells gracefully
 
-📄 Dynamic PDF Generation
+## 📄 Dynamic PDF Generation
 Generates reports using iText
 Supports multiple page sizes:
 A3, A4, A5, A6
 Configurable margins and layout
 
-📐 Intelligent Layout Engine
+## 📐 Intelligent Layout Engine
 Calculates:
 Column width
 Row height (based on text wrapping)
 Usable page area
 Ensures consistent formatting across pages
 
-🔄 Smart Pagination
+## 🔄 Smart Pagination
 Vertical Pagination (rows split across pages)
 Horizontal Pagination (columns split across pages)
 Avoids row breaking across pages
 Maintains readable structure
 
-🧩 Modular Architecture
+## 🧩 Modular Architecture
 
 The system is cleanly divided into components:
 
@@ -60,6 +60,7 @@ DrawPdf	Orchestrates- report generation
 Main-	Entry point
 
 
+## Technical Architecture
 
 Architecture
 Excel File
@@ -83,58 +84,8 @@ Java
 Apache POI → Excel processing
 iText 7 → PDF generation
 
-▶️ How to Run
-1. Clone the Repository
-```bash
-git clone https://github.com/your-username/report-builder.git
-cd report-builder
-```
-3. Add Dependencies
 
-Make sure you include:
-
-Apache POI
-iText 7
-
-(If using Maven, add dependencies in pom.xml)
-
-3. Run the Application
-```bash
-javac com/report_builder/*.java
-java com.report_builder.Main
-```
-5. Provide Input
-Enter path to Excel file
-Choose page size (A3/A4/A5/A6)
-6. Output
-PDF will be generated as:
-
-output_report_frame.pdf
-
-📸 Example Workflow
-Input Excel file:
-Employee Data.xlsx
-System:
-Reads sheet
-Calculates layout
-Splits into pages
-
-Output:
-
-Multi-page structured PDF report
-🧪 Design Highlights (Important)
-✔ Row Height Calculation
-Based on longest cell content
-Uses font metrics for accurate wrapping
-✔ Page Break Algorithm
-Greedy accumulation of row heights
-Ensures:
-No overflow
-Clean page boundaries
-✔ Column Partitioning
-Fixed number of columns per page
-Handles wide datasets elegantly
-📈 Future Improvements
+## 📈 Future Improvements
  Styling support (colors, fonts, themes)
  Header/footer support
  Export formats (CSV, HTML)
