@@ -8,6 +8,7 @@ This project and its source code are proprietary and confidential. Unauthorized 
 A from-scratch, enterprise-style report generation engine in Java that reads structured data from Excel files and renders paginated, column-aware PDF reports with dynamic layouts.
 
 
+> *A robust Java-based enterprise reporting engine designed to uderstand the internal logic of document rendering. It ingests raw tabular data from Excel for testing or which can be fed from a database too and processes it through a custom-built geometry and pagination engine to generate highly structured, multi-page PDFs. By programmatically calculating text wrapping, adaptive row heights, and handling complex multi-axis pagination (both horizontal and vertical), this project provides low-level control over the document generation pipeline—serving as a lightweight, from-scratch alternative to heavyweights like JasperReports.*
 
 
 
@@ -15,7 +16,7 @@ A from-scratch, enterprise-style report generation engine in Java that reads str
 
 This project is designed to simulate how real-world reporting systems work in enterprise environments.
 
-It takes raw tabular data from Excel and transforms it into a well-structured, multi-page PDF report, handling:
+It takes raw tabular data from Excel as testing (can include data from database too by adding an API) and transforms it into a well-structured, multi-page PDF report, handling:
 
 Dynamic table rendering
 Automatic pagination (rows + columns)
@@ -23,11 +24,74 @@ Adaptive layout based on page size
 Text wrapping and row height calculation
 
 
+# Core Logic
+To understand how Report Builder handles dynamic layouts without relying on external frameworks, here is a look at the internal geometry and pagination logic.
+
+1. Dynamic Row Height Calculation
+The ReportGeometry class calculates the exact height required for each row to accommodate text wrapping. Instead of fixed heights, it finds the cell that requires the most vertical space and scales the entire row accordingly.
+
+```java
+// Inside ReportGeometry.java- calculates row height based on text wrapping
+public float getRowHeight(String text) 
+{
+    if (text == null || text.trim().isEmpty()) 
+    {
+       return FONT_SIZE * LINE_SPACING; // Default to one line
+    }
+    
+    float textWidth = this.reportFont.getWidth(text, FONT_SIZE);
+    float textArea = this.column_width - 2; // Account for margins
+
+    int requiredLines = (int) Math.ceil(textWidth / textArea);
+    if (requiredLines == 0) 
+    {
+       requiredLines = 1;
+    }
+    
+    return requiredLines * FONT_SIZE * LINE_SPACING;
+}
+```
+
+2. Smart Vertical Pagination
+A major challenge in report generation is ensuring that a row of data is not split horizontally across two pages. The ReportPartitioner.java solves this using the findVerticalPageBreak algorithm, which pre-calculates safe break points based on the available page height.
+
+```java
+// Inside ReportPartitioner.java: Determines exact row indices for page breaks
+private List<Integer> findVerticalPageBreak() 
+{
+    List<Integer> pageBreakSequence = new ArrayList<>();
+    float currentSum = 0;
+    int totalRows = masterData.size();
+
+    for (int i = 0; i < totalRows; i++) 
+    {
+       float requiredRowHeight = precalculatedRowHeights.get(i);
+        
+        //checking to see if entire row fits into the page
+       if (currentSum + requiredRowHeight > this.AVAILABLE_HEIGHT) 
+       {
+          pageBreakSequence.add(i); // save the break point
+          currentSum = 0; // reset height sum for the new page
+          i--; // reevaluate this row for the top of the new page
+       } 
+       else 
+       {
+          currentSum += requiredRowHeight; // cumulative row height for a page
+       }
+    }
+    
+    pageBreakSequence.add(totalRows); //get the final block
+    return pageBreakSequence;
+}
+```
+
+
+
 ## Key Features
-📥 Excel Data Ingestion
-Reads multiple sheets from Excel
-Converts data into a structured List<List<String>>
-Handles missing/null cells gracefully
+1. Excel Data Ingestion
+2. Reads multiple sheets from Excel
+3. Converts data into a structured `List<List<String>>`
+4. Handles missing/null cells gracefully
 
 ## 📄 Dynamic PDF Generation
 Generates reports using iText
@@ -61,7 +125,7 @@ Main-	Entry point
 
 
 ## Technical Architecture
-
+```
 Architecture
 Excel File
    ↓
@@ -76,6 +140,7 @@ ReportPartitioner (pagination engine)
 DrawPdf (rendering)
    ↓
 PDF Output
+```
 
 
 
@@ -105,6 +170,6 @@ Memory vs layout tradeoffs
 
 It is similar in spirit to:
 
-JasperReports
-Crystal Reports
-Internal enterprise reporting systems
+- JasperReports
+- Crystal Reports
+- Internal enterprise reporting systems
